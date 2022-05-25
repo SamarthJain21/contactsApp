@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React,{useState} from 'react'
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import MyContacts from './screens/MyContacts'
+import demo from './screens/demo';
+// import CreateContact from './screens/CreateContact'
+import Profile from './screens/Profile'
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
+  const [data,setData]=useState([]);
+// import * as Contacts from 'expo-contacts';
+// 
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='MyContacts'>
+        <Stack.Screen name='MyContacts' component={MyContacts} />
+        {/* <Stack.Screen name='CreateContact' component={CreateContact} /> */}
+        <Stack.Screen name='Profile' component={Profile}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
